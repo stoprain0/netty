@@ -3,6 +3,7 @@ package org.zhiyu.coding;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -22,6 +23,7 @@ public class NettyServer {
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(parentGroup, childGroup)
                 .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG, 128)
                 .childHandler(new MyChannelInitializer());
             ChannelFuture future = bootstrap.bind(port).sync();
             System.out.println("itstack-demo-netty server start done. {关注公众号：bugstack虫洞栈，获取源码}");
