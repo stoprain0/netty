@@ -26,7 +26,6 @@ public class NettyServer {
                 .option(ChannelOption.SO_BACKLOG, 128)
                 .childHandler(new MyChannelInitializer());
             ChannelFuture future = bootstrap.bind(port).sync();
-            System.out.println("itstack-demo-netty server start done. {关注公众号：bugstack虫洞栈，获取源码}");
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
