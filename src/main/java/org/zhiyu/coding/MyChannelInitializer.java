@@ -7,6 +7,7 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 import java.nio.charset.Charset;
 
@@ -20,7 +21,10 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
 //        channel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,false, Delimiters.lineDelimiter()))
         //基于最大长度
 //        channel.pipeline().addLast(new FixedLengthFrameDecoder(4));
+        //解码器，收数据时起作用
         channel.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
+        //编码器，发数据时起作用
+        channel.pipeline().addLast(new StringEncoder(Charset.forName("GBK")));
         //在管道中添加我们自己的接收数据实现方法
         channel.pipeline().addLast(new MyServerHandler());
     }
