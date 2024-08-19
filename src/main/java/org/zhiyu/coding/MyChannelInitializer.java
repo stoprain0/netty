@@ -14,13 +14,8 @@ import java.nio.charset.Charset;
 public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
-        /* 解码器 */
         //基于换行符号
         channel.pipeline().addLast(new LineBasedFrameDecoder(1024));
-        //基于指定字符串【换行符，功能等同于上面】
-//        channel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,false, Delimiters.lineDelimiter()))
-        //基于最大长度
-//        channel.pipeline().addLast(new FixedLengthFrameDecoder(4));
         //解码器，收数据时起作用
         channel.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
         //编码器，发数据时起作用
